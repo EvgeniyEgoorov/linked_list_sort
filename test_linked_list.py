@@ -58,6 +58,30 @@ class TestLinkedList(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.ll.swap(1, 100000)
 
+    def test_bubble_sort(self):
+        self.ll.append(22)
+        self.ll.append(11)
+        bubble_sort(self.ll)
+        self.assertEqual(list(self.ll), [1, 2, 3, 11, 22])
+
+    def test_bubble_sort_for_equal_values(self):
+        self.ll.append(1)
+        self.ll.append(2)
+        bubble_sort(self.ll)
+        self.assertEqual(list(self.ll), [1, 1, 2, 2, 3])
+
+    def test_merge_sort(self):
+        self.ll.append(22)
+        self.ll.append(11)
+        merge_sort(self.ll)
+        self.assertEqual(list(self.ll), [1, 2, 3, 11, 22])
+
+    def test_merge_sort_for_equal_values(self):
+        self.ll.append(1)
+        self.ll.append(2)
+        merge_sort(self.ll)
+        self.assertEqual(list(self.ll), [1, 1, 2, 2, 3])
+
 
 if __name__ == '__main__':
     unittest.main()
