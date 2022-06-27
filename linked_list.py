@@ -19,3 +19,20 @@ class Node:
         self.__next = elem
 
 
+class LinkedList:
+    def __init__(self) -> None:
+        self.head = None
+        self.nodes_counter = 0
+
+    def __str__(self) -> str:
+        return ' -> '.join([str(node) for node in self])
+
+    def __iter__(self) -> int:
+        current = self.head
+        while current:
+            yield current.value
+            current = current.next
+
+    def __len__(self) -> int:
+        return self.nodes_counter
+
