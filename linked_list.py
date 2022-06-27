@@ -102,4 +102,10 @@ class LinkedList:
         node2.next = current
 
 
+def bubble_sort(linked_list: LinkedList) -> None:
+    """The function sorts a given linked list using Bubble sort method"""
+    for j in range(len(linked_list) - 1):
+        for i in range(len(linked_list) - 1 - j):
+            if linked_list.find(i).value > linked_list.find(i + 1).value:
+                linked_list.swap(i, i + 1)
 
