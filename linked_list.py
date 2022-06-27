@@ -1,3 +1,4 @@
+import timeit
 from typing import Optional
 
 
@@ -164,3 +165,28 @@ def merge_sort(linked_list: LinkedList) -> LinkedList:
     return linked_list
 
 
+def make_linked_list(data: list) -> LinkedList:
+    """The function creates a linked list"""
+    ll = LinkedList()
+    for el in data:
+        ll.append(el)
+    return ll
+
+
+def runtime_test(sort_method, data: list) -> None:
+    arr_for_test = [make_linked_list(data) for i in range(1000000)]
+    print(
+        "Average {.__name__} execution time: {: f} sec.".format(
+            sort_method, timeit.timeit(lambda: sort_method(arr_for_test.pop()), number=1000000) / 1000000
+        )
+    )
+
+
+if __name__ == '__main__':
+    elements = []
+    with open('input.txt', "r") as f:
+        for item in f.readlines():
+            elements.append(int(item))
+
+    runtime_test(bubble_sort, elements)
+    runtime_test(merge_sort, elements)
