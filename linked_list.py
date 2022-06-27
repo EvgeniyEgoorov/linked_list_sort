@@ -109,3 +109,58 @@ def bubble_sort(linked_list: LinkedList) -> None:
             if linked_list.find(i).value > linked_list.find(i + 1).value:
                 linked_list.swap(i, i + 1)
 
+
+def merge_lists(head1: Node, head2: Node) -> Optional['Node']:
+    """The function combines two linked lists, while sorting the elements in ascending order"""
+    if not head1:
+        return head2
+    if not head2:
+        return head1
+    temp_head = tail = Node(314159)
+    while head1 and head2:
+        if head1.value <= head2.value:
+            tail.next = head1
+            head1 = head1.next
+        else:
+            tail.next = head2
+            head2 = head2.next
+        tail = tail.next
+    tail.next = head1 or head2
+    return temp_head.next
+
+
+def list_separator(head: Node) -> tuple[Node, Node | None]:
+    """The function takes head of linked list, and splits the list into two"""
+    slow = head
+    fast = head.next
+    while fast:
+        fast = fast.next
+        if fast:
+            slow = slow.next
+            fast = fast.next
+    head1 = head
+    head2 = slow.next
+    slow.next = None
+    return head1, head2
+
+
+def merge_sort_step(head: Node) -> Node:
+    """
+    The function takes a head of a linked list and recursively calls the separator,
+    dividing the list into sub-lists until only one element remains in each, then sorts them by merging.
+    Will return a head of sorted list.
+    """
+    if not head or not head.next:
+        return head
+    a, b = list_separator(head)
+    a = merge_sort_step(a)
+    b = merge_sort_step(b)
+    return merge_lists(a, b)
+
+
+def merge_sort(linked_list: LinkedList) -> LinkedList:
+    """The function initiates merge sorting algorithm"""
+    linked_list.head = merge_sort_step(linked_list.head)
+    return linked_list
+
+
