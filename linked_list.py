@@ -3,7 +3,7 @@ from typing import Optional
 
 
 class Node:
-    def __init__(self, value: int, next_node: Optional['Node'] = None) -> None:
+    def __init__(self, value: int, next_node: Optional["Node"] = None) -> None:
         self.__value = value
         self.__next = next_node
 
@@ -12,11 +12,11 @@ class Node:
         return self.__value
 
     @property
-    def next(self) -> Optional['Node']:
+    def next(self) -> Optional["Node"]:
         return self.__next
 
     @next.setter
-    def next(self, elem: Optional['Node']) -> None:
+    def next(self, elem: Optional["Node"]) -> None:
         self.__next = elem
 
 
@@ -26,7 +26,7 @@ class LinkedList:
         self.nodes_counter = 0
 
     def __str__(self) -> str:
-        return ' -> '.join([str(node) for node in self])
+        return " -> ".join([str(node) for node in self])
 
     def __iter__(self) -> int:
         current = self.head
@@ -61,7 +61,11 @@ class LinkedList:
     def find(self, position: int) -> Node:
         """The function search a node by specified position number in the linked list"""
         if position > (len(self) - 1):
-            raise ValueError('The specified position ({}) is out of the current linked list length'.format(position))
+            raise ValueError(
+                "The specified position ({}) is out of the current linked list length".format(
+                    position
+                )
+            )
         current = self.head
         pointer = 0
         while current:
@@ -73,7 +77,7 @@ class LinkedList:
     def remove(self, position: int) -> None:
         """The function removes a node at the specified position of the linked list"""
         if not self.head:
-            raise ValueError('The linked list is empty -> nothing to remove')
+            raise ValueError("The linked list is empty -> nothing to remove")
         if position == 0:
             self.head = self.head.next
             self.nodes_counter -= 1
@@ -111,7 +115,7 @@ def bubble_sort(linked_list: LinkedList) -> None:
                 linked_list.swap(i, i + 1)
 
 
-def merge_lists(head1: Node, head2: Node) -> Optional['Node']:
+def merge_lists(head1: Node, head2: Node) -> Optional["Node"]:
     """The function combines two linked lists, while sorting the elements in ascending order"""
     if not head1:
         return head2
@@ -177,14 +181,16 @@ def runtime_test(sort_method, data: list) -> None:
     arr_for_test = [make_linked_list(data) for i in range(1000000)]
     print(
         "Average {.__name__} execution time: {: f} sec.".format(
-            sort_method, timeit.timeit(lambda: sort_method(arr_for_test.pop()), number=1000000) / 1000000
+            sort_method,
+            timeit.timeit(lambda: sort_method(arr_for_test.pop()), number=1000000)
+            / 1000000,
         )
     )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     elements = []
-    with open('input.txt', "r") as f:
+    with open("input.txt", "r") as f:
         for item in f.readlines():
             elements.append(int(item))
 
